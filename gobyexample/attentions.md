@@ -27,3 +27,19 @@ func main() {
 >只用来发送的chan声明： chan <- string   
 >只用来接收的chan声明： <- chan string
 
+### 使用golang自带通道实现超时处理
+```golang
+    //功能函数
+    go func() {
+        time.Sleep(time.Second * 2)
+        c1 <- "result 1"
+    }()
+    //使用select来监控他的结果
+    select {
+    case res := <-c1: //在超时时间内返回，走该分支
+        fmt.Println(res)
+    case <-time.After(time.Second * 3) :
+        fmt.Println("Ooh, time out...")
+    }
+```
+
