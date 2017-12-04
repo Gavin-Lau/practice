@@ -43,3 +43,19 @@ func main() {
     }
 ```
 
+### 非阻塞通道
+我们可以使用带default子句的多路select来实现非阻塞的发送和接收
+``` golang
+    messages := make(chan string)
+    signals := make(chan bool)
+    ...
+    msg := "hi"
+    //执行到select的时候,如果messages channel,内容是满的,则直接走default分支
+    select {
+    case messages <- msg:
+        fmt.Println("sent message", msg)
+    default:
+        fmt.Println("no message sent")
+    }
+```
+### 
