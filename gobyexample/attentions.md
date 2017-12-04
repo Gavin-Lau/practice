@@ -8,7 +8,7 @@
 ``` golang
 func (u *user) notify() {   
     fmt.Printf("Sending user email to %s“,u.name）
-    }
+}
 ```
 那么对应的接口调用也使用指针，不然会报
 >method has pointer receiverd
@@ -22,3 +22,8 @@ func main() {
     // PASSED THE ADDRESS AND NO MORE ERROR.
 }
 ```
+### 通道方向
+当使用通道作为函数参数的时候，你可以指定这个通道是不是只是用来作为发送或接收（单向的），这个特性可以提升程序的安全性
+>只用来发送的chan声明： chan <- string
+只用来接收的chan声明： <- chan string
+
